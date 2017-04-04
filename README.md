@@ -16,3 +16,29 @@ Pour utiliser ce playbook Ansible vous devez :
 - Adapter le fichier d'inventory "hosts" selon le nom, ip privée et port ssh publiques des instances que vous souhaitez déployer
 - Adapter le fichier deploy_bigata.yml en fonction de votre fichier d'inventory "hosts"
 - Configurer le fichier group_vars/all/vars_file.yml avec le nom de la zone avancée, le nom du réseau, l'id de l'offre de calcul, l'id de l'offre de disque, la taille des volumes datadisks, le nom du modèle à utiliser, etc. (les éléments tels que l'id de l'offre de calcul sont récupérables via l'API à l'aide de cloudmonkey par exemple).
+
+Pour exécuter ce playbook Ansible :
+-----------------------------------
+
+```shell
+ansible-playbook -i ./hosts deploy_bigdata.yml
+```
+
+ou en mode verbeux :
+
+```shell
+ansible-playbook -i ./hosts deploy_bigdata.yml --verbose
+```
+
+encore plus verbeux :
+
+```shell
+ansible-playbook -i ./hosts deploy_bigdata.yml --verbose -vvv
+```
+
+Pour lancer la destruction des ressources déployées :
+-----------------------------------
+
+```shell
+ansible-playbook -i ./hosts destroy_bigdata.yml
+```
