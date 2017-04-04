@@ -4,6 +4,7 @@
     state: present
     display_name: "{{ inventory_hostname }}"
     template: "{{ template_name }}"
+    ssh_key: "{{ my_ssh_key }}"
     api_region: "{{ cloudstack_api_endpoint }}"
     zone: "{{ cloudstack_zone_name }}" 
     service_offering: "{{ service_offeringid }}"
