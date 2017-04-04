@@ -1,0 +1,17 @@
+- name: Get the public ip of the '{{ network_name }}' network
+  shell: cloudmonkey list publicipaddresses listall=true | grep -A6 '{{ network_name }}' | grep ipaddress | awk '{print $NF}'
+  register: public_ip 
+
+- debug: msg="{{public_ip.stdout}}"
+
+- name: Create port forwarding rules and open firewall ingress ports
+  cs_portforward:
+    ip_address: "{{ public_ip.stdout }}"
+    api_region: '{{ cloudstack_api_endpoint }}'
+    zone: '{{ cloudstack_zone_name }}'
+    vm: "{{ inventory_hostname }}"
+    public_port: "{{ ansible_ssh_port }}"
+    private_port: "{{ portforwarding_priv }}" 
+    protocol: tcp
+    open_firewall: true
+    state: present

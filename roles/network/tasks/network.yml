@@ -1,0 +1,10 @@
+- name: "Create node network"
+  cs_network:
+    name: '{{ network_name }}'
+    display_text: '{{ network_name}}'
+    api_region: '{{ cloudstack_api_endpoint }}'
+    zone: '{{ cloudstack_zone_name }}'
+    network_offering: '{{ network_offeringid }}'
+    start_ip: '{{ network_start_ip }}'
+    gateway: '{{ network_gateway }}'
+    netmask: '{{ network_netmask }}'

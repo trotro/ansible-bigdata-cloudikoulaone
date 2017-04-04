@@ -1,0 +1,11 @@
+- name: 'Create and start node instances'
+  cs_instance:
+    name: "{{ inventory_hostname }}"
+    state: present
+    display_name: "{{ inventory_hostname }}"
+    template: "{{ template_name }}"
+    api_region: "{{ cloudstack_api_endpoint }}"
+    zone: "{{ cloudstack_zone_name }}" 
+    service_offering: "{{ service_offeringid }}"
+    ip_to_networks:
+      - {'network': '{{ network_name }}', 'ip': '{{ ippriv }}'}

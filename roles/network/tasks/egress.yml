@@ -1,0 +1,7 @@
+- name: Create egress rule for '{{ network_name }}' network 
+  cs_firewall:
+    network: '{{ network_name }}'
+    type: egress
+    protocol: all
+    api_region: '{{ cloudstack_api_endpoint }}'
+    zone: '{{ cloudstack_zone_name }}'

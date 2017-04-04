@@ -1,0 +1,31 @@
+---
+- name: Destroy bigdata instances
+  hosts: bigdata
+  connection: local
+  tasks:
+  - name: Destroy/expunge bigdata instances 
+    cs_instance:
+      name: "{{ inventory_hostname }}"
+      api_region: '{{ cloudstack_api_endpoint }}'
+      zone: '{{ cloudstack_zone_name }}'
+      state: expunged
+  - name: Remove datadisks volumes
+    cs_volume:
+      name: "DATADISK-{{ inventory_hostname }}" 
+      api_region: '{{ cloudstack_api_endpoint }}'
+      zone: '{{ cloudstack_zone_name }}'
+      vm: "{{ inventory_hostname }}" 
+      state: absent
+      force: true
+
+- name: Remove bigdata network 
+  hosts: master01
+  connection: local
+  tasks:
+  - name: Remove bigdata network
+    cs_network:
+      name: '{{ network_name }}' 
+      api_region: '{{ cloudstack_api_endpoint }}'
+      zone: '{{ cloudstack_zone_name }}'
+      state: absent
+...

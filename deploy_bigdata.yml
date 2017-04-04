@@ -1,0 +1,26 @@
+---
+- name: "Create bigdata network with egress rules"
+  hosts: master01
+  connection: local
+  roles:
+    - { role: network, tags: ["network"] }
+
+
+- name: "Provision masters and datanodes instances"
+  hosts: bigdata
+  connection: local
+  roles:
+    - { role: instances, tags: ["instances"] }
+
+- name: "Create and attach datadisk's volumes to datanodes instances"
+  hosts: datanodes
+  connection: local
+  roles:
+    - { role: volumes, tags: ["volumes"] }
+
+- name: "Create port forwarding and firewalling rules"
+  hosts: bigdata
+  connection: local
+  roles:
+    - { role: portforwarding, tags: ["portforwarding"] }
+...

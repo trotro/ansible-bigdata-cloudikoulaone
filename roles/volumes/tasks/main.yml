@@ -1,0 +1,9 @@
+- name: Create and attach datadisk's node volumes 
+  cs_volume:
+    name: "DATADISK-{{ inventory_hostname }}"
+    api_region: '{{ cloudstack_api_endpoint }}'
+    zone: '{{ cloudstack_zone_name }}'
+    disk_offering: '{{ disk_offeringid }}'
+    size: '{{ datadisk_size }}'
+    vm: "{{ inventory_hostname }}"
+    state: attached
